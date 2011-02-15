@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map IRDistance
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+PID	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setPGain	KEYWORD2
+setIGain	KEYWORD2
+setDGain	KEYWORD2
+setMaxOut	KEYWORD2
+setMinOut	KEYWORD2
+
+getPID	KEYWORD2
+getPI	KEYWORD2
+getP	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
