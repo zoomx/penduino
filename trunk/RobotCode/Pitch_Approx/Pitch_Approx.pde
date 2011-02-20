@@ -8,12 +8,6 @@ IRPitchApproximation pitchApprox(&frontIR, &backIR, 15.3);
 
 void setup(){
   Serial.begin(9600);
-  pid.setMaxOut(30);
-  pid.setMinOut(-30);
-  
-  pid.setPGain(2.4);
-  pid.setIGain(0.1);
-  pid.setDGain(-1);
 }
 
 void loop(){
