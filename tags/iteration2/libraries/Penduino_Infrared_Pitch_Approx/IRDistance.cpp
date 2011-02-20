@@ -26,7 +26,7 @@ int IRDistance::getMeanVolts(int scans){
 	int voltage = 0;
 	int min = 2000;
 	int max = 0;
-	if(scan <= 0){
+	if(scans <= 0){
 		//Checkout Exceptions
 		return 0;
 	}
