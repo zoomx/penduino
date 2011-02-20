@@ -26,13 +26,13 @@ private:
     int _pGainAddr;
     int _iGainAddr;
     int _dGainAddr;
-    double pGain;
-    double iGain;
-    double dGain ;
+    double _pGain;
+    double _iGain;
+    double _dGain ;
     double _maxOut;
     double _minOut;
-    double errorSum;
-    double lastError;
+    double _errorSum;
+    double _lastError;
     double integral(double setPoint);
     double derivative(double setPoint);
     double trim(double value);
