@@ -20,8 +20,8 @@ PID::PID(int pGainAddr, int iGainAddr, dGainAddr) {
   eeprom_read_block(&_iGainAddr, &_iGain, sizeof(double));
   eeprom_read_block(&_dGainAddr, &_dGain, sizeof(double));
   
-  errorSum = 0;
-  lastError = 0;
+  _errorSum = 0;
+  _lastError = 0;
 }
 
 double PID::getP(double error){
