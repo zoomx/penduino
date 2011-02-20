@@ -8,7 +8,7 @@
 #include "PID.h"
 #include <avr/eeprom.h>
 
-PID::PID(int pGainAddr, int iGainAddr, dGainAddr) {
+PID::PID(int pGainAddr, int iGainAddr, int dGainAddr) {
   _pGainAddr = pGainAddr;
   _iGainAddr = iGainAddr;
   _dGainAddr = dGainAddr;
@@ -25,7 +25,7 @@ PID::PID(int pGainAddr, int iGainAddr, dGainAddr) {
 }
 
 double PID::getP(double error){
-    return trim(pGain * error);
+    return trim(_pGain * error);
 }
 
 double PID::getPI(double error){
@@ -41,14 +41,14 @@ double PID::getPID(double error){
 double PID::integral(double error){
     //MUST ADD A BOUNDARY FOR ERRORSUMM
 
-    errorSum+= error;
-    return iGain * errorSum;
+    _errorSum+= error;
+    return _iGain * _errorSum;
 }
 
 double PID::derivative(double error){
-    double deriv = error - lastError;
-    lastError = error;
-    return deriv * dGain;
+    double deriv = error - _lastError;
+    _lastError = error;
+    return deriv * _dGain;
 }
 
 void PID::setPGain(double pGain){
