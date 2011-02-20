@@ -6,15 +6,22 @@
  */
 
 #include "PID.h"
+#include <avr/eeprom.h>
 
-PID::PID() {
-    _maxOut = 99999;
-    _minOut = -99999;
-    pGain = 0;
-   iGain = 0;
-    dGain = 0;
-   errorSum = 0;
-   lastError = 0;
+PID::PID(int pGainAddr, int iGainAddr, dGainAddr) {
+  _pGainAddr = pGainAddr;
+  _iGainAddr = iGainAddr;
+  _dGainAddr = dGainAddr;
+  
+  _maxOut = 99999;
+  _minOut = -99999;
+  
+  eeprom_read_block(&_pGainAddr, &_pGain, sizeof(double));
+  eeprom_read_block(&_iGainAddr, &_iGain, sizeof(double));
+  eeprom_read_block(&_dGainAddr, &_dGain, sizeof(double));
+  
+  errorSum = 0;
+  lastError = 0;
 }
 
 double PID::getP(double error){
@@ -45,23 +52,26 @@ double PID::derivative(double error){
 }
 
 void PID::setPGain(double pGain){
-this->pGain = pGain;
+  _pGain = pGain;
+  eeprom_write_block(&_pGainAddr, &_pGain, sizeof(double));
 }
 
 void PID::setIGain(double iGain){
-this->iGain = iGain;
+  _iGain = iGain;
+  eeprom_write_block(&_iGainAddr, &_iGain, sizeof(double));
 }
 
 void PID::setDGain(double dGain){
-this->dGain = dGain;
+  _dGain = dGain;
+  prom_write_block(&_dGainAddr, &_dGain, sizeof(double));
 }
 
 void PID::setMaxOut(double maxOut){
-_maxOut = maxOut;
+  _maxOut = maxOut;
 }
 
 void PID::setMinOut(double minOut){
-    _minOut = minOut;
+  _minOut = minOut;
 }
 
 double PID::trim(double value){
