@@ -10,7 +10,7 @@
 
 class PID {
 public:
-    PID();
+    PID(int pGainAddr, int iGainAddr, int dGainAddr);
 
     void setPGain(double pGain);
     void setIGain(double iGain);
@@ -23,6 +23,9 @@ public:
     double getP(double error);
 
 private:
+    int _pGainAddr;
+    int _iGainAddr;
+    int _dGainAddr;
     double pGain;
     double iGain;
     double dGain ;
