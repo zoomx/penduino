@@ -63,7 +63,7 @@ void PID::setIGain(double iGain){
 
 void PID::setDGain(double dGain){
   _dGain = dGain;
-  prom_write_block(&_dGainAddr, &_dGain, sizeof(double));
+  eeprom_write_block(&_dGainAddr, &_dGain, sizeof(double));
 }
 
 void PID::setMaxOut(double maxOut){
