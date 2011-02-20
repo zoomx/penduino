@@ -26,6 +26,10 @@ int IRDistance::getMeanVolts(int scans){
 	int voltage = 0;
 	int min = 2000;
 	int max = 0;
+	if(scan <= 0){
+		//Checkout Exceptions
+		return 0;
+	}
 	for(int i = 0; i<scans+2; i++){
 		reading = analogRead(_pin);
 		voltage+= reading;
