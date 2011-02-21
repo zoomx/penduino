@@ -54,16 +54,22 @@ double PID::derivative(double error){
 void PID::setPGain(double pGain){
   _pGain = pGain;
   eeprom_write_block(&_pGainAddr, &_pGain, sizeof(double));
+  _errorSum = 0;
+  _lastError = 0;
 }
 
 void PID::setIGain(double iGain){
   _iGain = iGain;
   eeprom_write_block(&_iGainAddr, &_iGain, sizeof(double));
+  _errorSum = 0;
+  _lastError = 0;
 }
 
 void PID::setDGain(double dGain){
   _dGain = dGain;
   eeprom_write_block(&_dGainAddr, &_dGain, sizeof(double));
+  _errorSum = 0;
+  _lastError = 0;
 }
 
 void PID::setMaxOut(double maxOut){
