@@ -16,9 +16,9 @@ PID::PID(int pGainAddr, int iGainAddr, int dGainAddr) {
   _maxOut = 99999;
   _minOut = -99999;
   
-  eeprom_read_block(&_pGainAddr, &_pGain, sizeof(double));
-  eeprom_read_block(&_iGainAddr, &_iGain, sizeof(double));
-  eeprom_read_block(&_dGainAddr, &_dGain, sizeof(double));
+  eeprom_read_block(&_pGain, &_pGainAddr, sizeof(double));
+  eeprom_read_block(&_iGain, &_iGainAddr, sizeof(double));
+  eeprom_read_block(&_dGain, &_dGainAddr, sizeof(double));
   
   _errorSum = 0;
   _lastError = 0;
@@ -53,21 +53,21 @@ double PID::derivative(double error){
 
 void PID::setPGain(double pGain){
   _pGain = pGain;
-  eeprom_write_block(&_pGainAddr, &_pGain, sizeof(double));
+  eeprom_write_block(&_pGain, &_pGainAddr, sizeof(double));
   _errorSum = 0;
   _lastError = 0;
 }
 
 void PID::setIGain(double iGain){
   _iGain = iGain;
-  eeprom_write_block(&_iGainAddr, &_iGain, sizeof(double));
+  eeprom_write_block(&_iGain, &_iGainAddr, sizeof(double));
   _errorSum = 0;
   _lastError = 0;
 }
 
 void PID::setDGain(double dGain){
   _dGain = dGain;
-  eeprom_write_block(&_dGainAddr, &_dGain, sizeof(double));
+  eeprom_write_block(&_dGain, &_dGainAddr, sizeof(double));
   _errorSum = 0;
   _lastError = 0;
 }
@@ -89,5 +89,15 @@ double PID::trim(double value){
     return value;
 }
 
+double PID::getPGain(){
+	return _pGain;
+}
 
+double PID::getIGain(){
+	return _iGain;
+}
+
+double PID::getDGain(){
+	return _dGain;
+}
 

@@ -22,6 +22,10 @@ public:
     double getPI(double error);
     double getP(double error);
 
+	double getPGain();
+	double getIGain();
+	double getDGain();
+
 private:
     int _pGainAddr;
     int _iGainAddr;
