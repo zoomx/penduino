@@ -1,5 +1,6 @@
 package com.googlecode.penduino.gui;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 
 public class GuiMain {
@@ -9,8 +10,9 @@ public class GuiMain {
 		SerialChooserPanel scp = new SerialChooserPanel();
 		frame.add("North", scp);
 		PitchPanel pitch = new PitchPanel();
+		pitch.setLayout(new BoxLayout(pitch, BoxLayout.PAGE_AXIS));
 		frame.add("Center", pitch);
-		//frame.pack();
+		frame.pack();
 		frame.setVisible(true);
 	}
 	
@@ -20,7 +22,9 @@ public class GuiMain {
 		frame.setVisible(false);
 		frame.setTitle("Penduino Telemetry");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(400, 300);
+		//frame.setSize(400, 400);
+		
+		//TODO: set an on close action to close serial connection!!!
 		return frame;
 	}
 }
