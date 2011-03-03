@@ -12,6 +12,8 @@ public class GuiMain {
 		PitchPanel pitch = new PitchPanel();
 		pitch.setLayout(new BoxLayout(pitch, BoxLayout.PAGE_AXIS));
 		frame.add("Center", pitch);
+		PidControlPanel pid = new PidControlPanel();
+		frame.add("South", pid);
 		frame.pack();
 		frame.setVisible(true);
 	}

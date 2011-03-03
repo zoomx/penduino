@@ -52,6 +52,7 @@ public enum Robot {
 
 	public void setpGain(double pGain) {
 		this.pGain = pGain;
+		PidVars.P.setValue(pGain);
 		for(PidTuningChangedListener ptcl : pidTuningChangeListeners){
 			ptcl.pGainChangedEvent(pGain);
 		}
@@ -64,7 +65,7 @@ public enum Robot {
 	public void setiGain(double iGain) {
 		this.iGain = iGain;
 		for(PidTuningChangedListener ptcl : pidTuningChangeListeners){
-			ptcl.pGainChangedEvent(iGain);
+			ptcl.iGainChangedEvent(iGain);
 		}
 	}
 
@@ -75,8 +76,29 @@ public enum Robot {
 	public void setdGain(double dGain) {
 		this.dGain = dGain;
 		for(PidTuningChangedListener ptcl : pidTuningChangeListeners){
-			ptcl.pGainChangedEvent(iGain);
+			ptcl.dGainChangedEvent(dGain);
 		}
 	}
 	
+	public void setPidVar(PidVars var){
+		if(var.equals(PidVars.P)){
+			this.setpGain(var.getValue());
+		} else if(var.equals(PidVars.I)){
+			this.setiGain(var.getValue());
+		} else {
+			this.setdGain(var.getValue());
+		}
+	}
+	
+	public double getPidVar(PidVars var){
+		if(var.equals(PidVars.P)){
+			return this.getpGain();
+		} else if(var.equals(PidVars.I)){
+			return this.getiGain();
+		} else {
+			return this.getdGain();
+		}
+	}
+	
+	//TODO some kind of update thing for getting data from the actual robot
 }

@@ -30,19 +30,14 @@ public class Main {
 			connection.addSerialMessageHandler(dummy);
 			System.out.println("Started Arduino Serial Connection");
 		} catch (NoSuchPortException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (PortInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnsupportedCommOperationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TooManyListenersException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
