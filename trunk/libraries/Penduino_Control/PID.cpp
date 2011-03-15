@@ -5,8 +5,11 @@
  * Created on 17 December 2010, 19:33
  */
 
-#include "PID.h"
+#include <math.h>
 #include <avr/eeprom.h>
+
+#include "PID.h"
+#include "WProgram.h"
 
 PID::PID(int pGainAddr, int iGainAddr, int dGainAddr) {
   _pGainAddr = pGainAddr;
@@ -19,6 +22,18 @@ PID::PID(int pGainAddr, int iGainAddr, int dGainAddr) {
   eeprom_read_block(&_pGain, &_pGainAddr, sizeof(double));
   eeprom_read_block(&_iGain, &_iGainAddr, sizeof(double));
   eeprom_read_block(&_dGain, &_dGainAddr, sizeof(double));
+
+	if(isnan(_pGain)==1){
+		_pGain = 0;
+	}
+	
+	if(isnan(_iGain)==1){
+		_iGain = 0;
+	}
+	
+	if(isnan(_dGain)==1){
+		_dGain  = 0;
+	}
   
   _errorSum = 0;
   _lastError = 0;
@@ -53,7 +68,7 @@ double PID::derivative(double error){
 
 void PID::setPGain(double pGain){
   _pGain = pGain;
-  eeprom_write_block(&_pGain, &_pGainAddr, sizeof(double));
+ eeprom_write_block(&_pGain, &_pGainAddr, sizeof(double));
   _errorSum = 0;
   _lastError = 0;
 }
@@ -67,7 +82,7 @@ void PID::setIGain(double iGain){
 
 void PID::setDGain(double dGain){
   _dGain = dGain;
-  eeprom_write_block(&_dGain, &_dGainAddr, sizeof(double));
+eeprom_write_block(&_dGain, &_dGainAddr, sizeof(double));
   _errorSum = 0;
   _lastError = 0;
 }
