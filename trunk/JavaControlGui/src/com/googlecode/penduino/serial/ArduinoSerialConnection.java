@@ -3,6 +3,7 @@ package com.googlecode.penduino.serial;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -31,6 +32,8 @@ public class ArduinoSerialConnection implements SerialPortEventListener {
 
 	private Collection<ArduinoSerialMessageHandler> messageHandlers = new ArrayList<ArduinoSerialMessageHandler>();
 
+	//TODO This needs tidying up and adding baud rate etc
+	
 	public ArduinoSerialConnection(String portName, int bufferSize)
 			throws NoSuchPortException, PortInUseException,
 			UnsupportedCommOperationException, IOException,
@@ -75,6 +78,8 @@ public class ArduinoSerialConnection implements SerialPortEventListener {
 		}
 		// Ignore all the other eventTypes, but you should consider the other
 		// ones.
+		
+		
 	}
 
 	public synchronized void close() {
@@ -103,6 +108,18 @@ public class ArduinoSerialConnection implements SerialPortEventListener {
 			portNames.add(currPortId.getName());
 		}
 		return portNames;
+	}
+	
+	public void sendOverSerial(String msg){
+		try {
+			output.write(msg.getBytes("ASCII"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -16,7 +16,8 @@ public enum Director {
 	
 	private ArduinoSerialConnection connection = null;
 
-	
+	//TODO Need to handler exceptions better. For example port in use should bring up an error box
+	//in the gui no just crash
 	public void createNewArduinoSerialConnection(String portName){
 		try {
 			if(connection!= null){

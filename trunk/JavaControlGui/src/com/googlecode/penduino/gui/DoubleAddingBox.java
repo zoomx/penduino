@@ -11,15 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import com.googlecode.penduino.model.PidVarUpdateListener;
 import com.googlecode.penduino.model.PidVars;
 import com.googlecode.penduino.model.Robot;
 
 @SuppressWarnings("serial")
-public class DoubleAddingBox extends JPanel implements ActionListener {
+public class DoubleAddingBox extends JPanel implements ActionListener,
+		PidVarUpdateListener {
 
 	private PidVars pidVar;
-
-	private double value = 0.00;
 
 	private JButton addOne = new JButton("+1");
 	private JButton addTenth = new JButton("+0.1");
@@ -28,19 +28,22 @@ public class DoubleAddingBox extends JPanel implements ActionListener {
 	private JButton takeTenth = new JButton("-0.1");
 	private JButton takeHundreth = new JButton("-0.01");
 
-	private JLabel valueBox = new JLabel("" + value);
+	private JLabel valueBox = new JLabel("0.00");
 
 	Dimension buttonSize = new Dimension(40, 25);
 	Insets insets = new Insets(1, 1, 1, 1);
+	
+	private boolean enabled = false;
 
 	public DoubleAddingBox(PidVars pidVar) {
+		this.pidVar = pidVar;
 		TitledBorder title;
 		title = BorderFactory.createTitledBorder(pidVar.getName());
 		this.setBorder(title);
 
-		valueBox.setPreferredSize(new Dimension(55,30));
+		valueBox.setPreferredSize(new Dimension(55, 30));
 		valueBox.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		this.setUpButton(addOne);
 		this.setUpButton(addTenth);
 		this.setUpButton(addHundreth);
@@ -57,6 +60,10 @@ public class DoubleAddingBox extends JPanel implements ActionListener {
 		this.add(addOne);
 		this.add(addTenth);
 		this.add(addHundreth);
+
+		this.setEnabled(false);
+
+		Robot.INSTANCE.addPidVarUpdateListener(this);
 	}
 
 	private void setUpButton(JButton button) {
@@ -66,14 +73,20 @@ public class DoubleAddingBox extends JPanel implements ActionListener {
 		button.addActionListener(this);
 	}
 
-	public void enable(double value) {
-		addOne.setEnabled(true);
-		addTenth.setEnabled(true);
-		addHundreth.setEnabled(true);
-		takeOne.setEnabled(true);
-		takeTenth.setEnabled(true);
-		takeHundreth.setEnabled(true);
-		this.value = value;
+	@Override
+	public void setEnabled(boolean bool) {
+		addOne.setEnabled(bool);
+		addTenth.setEnabled(bool);
+		addHundreth.setEnabled(bool);
+		takeOne.setEnabled(bool);
+		takeTenth.setEnabled(bool);
+		takeHundreth.setEnabled(bool);
+		enabled = bool;
+	}
+	
+	@Override
+	public boolean isEnabled(){
+		return enabled;
 	}
 
 	@Override
@@ -109,6 +122,18 @@ public class DoubleAddingBox extends JPanel implements ActionListener {
 			pidVar.setValue(value);
 			Robot.INSTANCE.setPidVar(pidVar);
 		}
+	}
+
+	@Override
+	public void updatePidVar(PidVars var) {
+		if (var.equals(this.pidVar)) {
+			if (!this.isEnabled()) {
+				this.setEnabled(true);
+			}
+			valueBox.setText(var.getValue() + "");
+			valueBox.repaint();
+		}
+
 	}
 
 }

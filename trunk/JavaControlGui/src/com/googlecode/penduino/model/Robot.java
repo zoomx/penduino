@@ -20,6 +20,9 @@ public enum Robot {
 	private Collection<PidTuningChangedListener> pidTuningChangeListeners =
 		new ArrayList<PidTuningChangedListener>();
 	
+	private Collection<PidVarUpdateListener> pidVarsUpdateListeners =
+		new ArrayList<PidVarUpdateListener>();
+	
 	public void initialise(double pitch, double pGain, double iGain, double dGain){
 		this.pitch = pitch;
 		this.pGain = pGain;
@@ -101,4 +104,22 @@ public enum Robot {
 	}
 	
 	//TODO some kind of update thing for getting data from the actual robot
+	
+	public void updatePidVar(PidVars var){
+		if(var.equals(PidVars.P)){
+			this.pGain = var.getValue();
+		}else if(var.equals(PidVars.I)){
+			this.iGain = var.getValue();
+		} else if(var.equals(PidVars.D)){
+			this.dGain = var.getValue();
+		}
+		for(PidVarUpdateListener pvul : pidVarsUpdateListeners){
+			pvul.updatePidVar(var);
+		}
+	}
+	
+	public void addPidVarUpdateListener(PidVarUpdateListener pvul){
+		pidVarsUpdateListeners.add(pvul);
+		System.out.println("I've been added MOFO");
+	}
 }
