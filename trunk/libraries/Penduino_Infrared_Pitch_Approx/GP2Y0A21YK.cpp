@@ -1,5 +1,5 @@
 #include <GP2Y0A21YK.h>
-#include <IRDistance.h>
+#include "WProgram.h"
 
 GP2Y0A21YK::GP2Y0A21YK(int pin):IRDistance(pin){
 }

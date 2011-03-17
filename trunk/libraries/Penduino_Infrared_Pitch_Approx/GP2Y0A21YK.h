@@ -8,6 +8,8 @@
 #ifndef _GP2Y0A21YK_H
 #define	_GP2Y0A21YK_H
 
+#include <IRDistance.h>
+
 class GP2Y0A21YK : public IRDistance {
 public:
 	GP2Y0A21YK(int pin);
