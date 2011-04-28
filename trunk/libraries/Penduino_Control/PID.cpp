@@ -23,15 +23,15 @@ PID::PID(int pGainAddr, int iGainAddr, int dGainAddr) {
   eeprom_read_block(&_iGain, &_iGainAddr, sizeof(double));
   eeprom_read_block(&_dGain, &_dGainAddr, sizeof(double));
 
-	if(isnan(_pGain)==1 || isinf(_pGain)!=0){
+	if(isfinite(_pGain)!=0){
 		_pGain = 0;
 	}
 	
-	if(isnan(_iGain)==1 || isinf(_iGain)!=0){
+	if(isfinite(_iGain)!=0){
 		_iGain = 0;
 	}
 	
-	if(isnan(_dGain)==1 || isinf(_dGain)!=0){
+	if(isfinite(_dGain)!=0){
 		_dGain  = 0;
 	}
   
