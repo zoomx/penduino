@@ -23,15 +23,15 @@ PID::PID(int pGainAddr, int iGainAddr, int dGainAddr) {
   eeprom_read_block(&_iGain, &_iGainAddr, sizeof(double));
   eeprom_read_block(&_dGain, &_dGainAddr, sizeof(double));
 
-	if(isfinite(_pGain)!=0){
+	if(isnan(_pGain)!=0 || isinf(_pGain) != 0){
 		_pGain = 0;
 	}
 	
-	if(isfinite(_iGain)!=0){
+	if(isnan(_pGain)!=0 || isinf(_pGain) != 0){
 		_iGain = 0;
 	}
 	
-	if(isfinite(_dGain)!=0){
+	if(isnan(_pGain)!=0 || isinf(_pGain) != 0){
 		_dGain  = 0;
 	}
   
@@ -40,17 +40,21 @@ PID::PID(int pGainAddr, int iGainAddr, int dGainAddr) {
 }
 
 double PID::getP(double error){
-    return trim(_pGain * error);
+    return trim(proportional(error));
 }
 
 double PID::getPI(double error){
-    double value = getP(error) + integral(error);
+    double value = proportional(error) + integral(error);
     return trim(value);
 }
 
 double PID::getPID(double error){
-    double value = getP(error) + integral(error) + derivative(error);
+    double value = proportional(error) + integral(error) + derivative(error);
 	return trim(value);
+}
+
+double PID::proportional(double error){
+	return _pGain * error;
 }
 
 double PID::integral(double error){

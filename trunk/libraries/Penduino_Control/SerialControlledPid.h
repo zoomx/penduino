@@ -29,21 +29,21 @@ public:
 	void readSerialCommands();
 
 private:
-    int _pGainAddr;
-    int _iGainAddr;
-    int _dGainAddr;
-    double _pGain;
-    double _iGain;
-    double _dGain ;
-    double _maxOut;
-    double _minOut;
-    double _errorSum;
-    double _lastError;
-    double integral(double setPoint);
-    double derivative(double setPoint);
-    double trim(double value);
+	int _pGainAddr;
+	int _iGainAddr;
+	int _dGainAddr;
+	double _pGain;
+	double _iGain;
+	double _dGain ;
+	double _maxOut;
+	double _minOut;
+	double _errorSum;
+	double _lastError;
+	double proportional(double setPoint);
+	double integral(double setPoint);
+	double derivative(double setPoint);
+	double trim(double value);
 	double processSerial(double valueIn);
-
 };
 
 #endif	/* _SERIALCONTROLLEDPID_H */
