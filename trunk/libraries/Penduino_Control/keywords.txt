@@ -1,5 +1,5 @@
 #######################################
-# Syntax Coloring Map IRDistance
+# Syntax Coloring Map PID/SerialControlledPid
 #######################################
 
 #######################################
@@ -7,6 +7,7 @@
 #######################################
 
 PID	KEYWORD1
+SerialControlledPid	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -18,15 +19,11 @@ setDGain	KEYWORD2
 setMaxOut	KEYWORD2
 setMinOut	KEYWORD2
 
-getPGain	KEYWORD2
-getIGain	KEYWORD2
-getDGain	KEYWORD2
-getMaxOut	KEYWORD2
-getMinOut	KEYWORD2
-
 getPID	KEYWORD2
 getPI	KEYWORD2
 getP	KEYWORD2
+
+readSerialCommands	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
