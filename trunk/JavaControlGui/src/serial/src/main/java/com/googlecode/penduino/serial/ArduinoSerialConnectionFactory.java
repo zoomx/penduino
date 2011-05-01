@@ -18,8 +18,7 @@ public enum ArduinoSerialConnectionFactory {
 	private Collection<ArduinoSerialMessageHandler> handlers = new ArrayList<ArduinoSerialMessageHandler>();
 	private Collection<ArduinoSerialMessageCreator> creators = new ArrayList<ArduinoSerialMessageCreator>();
 	
-	//TODO Need to handler exceptions better. For example port in use should bring up an error box
-	//in the gui no just crash
+	
 	public void openDefaultArduinoSerialConnection(String portName) throws com.googlecode.penduino.serial.exceptions.PortInUseException{
 		try {
 			if(connection!= null){
@@ -27,8 +26,6 @@ public enum ArduinoSerialConnectionFactory {
 			}
 			connection = new ArduinoSerialConnection(portName, 150, 9600, (byte)10);
 			
-			//Could hold a list of objects that get added as handlers
-			//which are registered on main.
 			for(ArduinoSerialMessageHandler handler : handlers){
 				connection.addSerialMessageHandler(handler);
 			}
