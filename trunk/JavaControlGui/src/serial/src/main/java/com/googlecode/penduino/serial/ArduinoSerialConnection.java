@@ -33,8 +33,6 @@ class ArduinoSerialConnection implements SerialPortEventListener {
 	private final byte terminateByte;
 
 	private Collection<ArduinoSerialMessageHandler> messageHandlers = new ArrayList<ArduinoSerialMessageHandler>();
-
-	//TODO This needs tidying up and adding baud rate etc
 	
 	public ArduinoSerialConnection(String portName, int bufferSize, int dataRate, byte terminateByte)
 			throws NoSuchPortException, PortInUseException,
