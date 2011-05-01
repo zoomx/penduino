@@ -115,11 +115,9 @@ class ArduinoSerialConnection implements SerialPortEventListener {
 		try {
 			output.write(msg.getBytes("ASCII"));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e.toString());
 		}
 	}
 
