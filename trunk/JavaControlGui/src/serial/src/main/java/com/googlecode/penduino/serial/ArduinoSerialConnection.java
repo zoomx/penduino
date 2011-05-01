@@ -80,9 +80,6 @@ class ArduinoSerialConnection implements SerialPortEventListener {
 				System.err.println(e.toString());
 			}
 		}
-		// Ignore all the other eventTypes, but you should consider the other
-		// ones.
-		
 		
 	}
 
