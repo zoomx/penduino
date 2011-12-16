@@ -1,6 +1,6 @@
 #summary Description of the techniques available for control systems.
 
-= Reacting to Pitch AKA Control Systems=
+= Reacting to Pitch (AKA Control Systems)=
 
 These pages are acting as place holders whilst I update the wiki pages. Sorry it's taken this long to have time to start sorting this out.
 
